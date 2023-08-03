@@ -1,31 +1,31 @@
 import {defineStore} from "pinia"
 import axios from "axios"
 
-export const useRevisionStore = defineStore("revision",()=>{
+export const useRutaStore = defineStore("ruta",()=>{
     let data= ""
 
-    const registrarRevision = async(info)=>{
+    const registrarRuta = async(info)=>{
         try {
-            let datos = await axios.post("https://backend-i3b9.onrender.com/api/revision",info)
+            let datos = await axios.post("http://localhost:4000/api/ruta",info)
             return datos
         } catch (error) {
             console.log(error);
         }
     }
 
-    const buscarRevision= async()=> {
+    const buscarRuta=async()=> {
       try {
-        const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/revision`)
-        console.log(buscar.data.buscar);
-        return buscar.data.buscar
+        const buscar= await axios.get(`http://localhost:4000/api/ruta`)
+         console.log(buscar.data.buscar);
+         return buscar.data.buscar
       } catch (error) {
         console.log(error);
       }
         }
         
-        const buscarRevisionId = async (id) => {
+        const buscarRutaId = async (id) => {
           try {
-            let response = await axios.get(`https://backend-i3b9.onrender.com/api/revision/${id}`, {
+            let response = await axios.get(`http://localhost:4000/api/ruta/${id}`, {
               params: { _id: id },
             });
             console.log(response.data);
@@ -34,22 +34,23 @@ export const useRevisionStore = defineStore("revision",()=>{
             console.log(error);
           }
         };
-
-        const editarRevision = async (id, tecnomecanica, fecha_proxima_revision) => {
+        const editarRuta = async (id, origen, destino, salida, tiempo) => {
           try {
-            const response = await axios.put(`https://backend-i3b9.onrender.com/api/revision/${id}`, {
-             tecnomecanica:tecnomecanica,
-             fecha_proxima_revision:fecha_proxima_revision
+            const response = await axios.put(`http://localhost:4000/api/ruta/${id}`, {
+              origen:origen,
+              destino:destino,
+              salida:salida,
+              tiempo:tiempo
             });
-            console.log(response.data);
             return response.data;
           } catch (error) {
             console.error('Error al editar el cliente:', error);
           }
         };
+
         const cambiarEstado= async (id,estado)=>{
           try {
-            let res= await axios.patch(`https://backend-i3b9.onrender.com/api/revision/${id}`,
+            let res= await axios.patch(`http://localhost:4000/api/ruta/${id}`,
             {estado:estado})
             console.log(res.data);
             return res.data
@@ -57,12 +58,11 @@ export const useRevisionStore = defineStore("revision",()=>{
             console.log(error);
           }
             }
-
     return{
-        registrarRevision,
-        buscarRevision,
-        buscarRevisionId,
-        editarRevision,
+        registrarRuta,
+        buscarRuta,
+        buscarRutaId,
+        editarRuta,
         cambiarEstado
     }
 })
