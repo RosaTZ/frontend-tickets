@@ -28,7 +28,7 @@
             </q-item-section>
 
             <q-item-section>
-              <router-link to="/homeAdmin" style="text-decoration: none;color: black;">
+              <router-link to="/infoEmpresa" style="text-decoration: none;color: black;">
                 Home
               </router-link>
             </q-item-section>
@@ -131,7 +131,7 @@
 
 <script>
 import { ref } from 'vue'
-let empresa=ref('cotrasaravita')
+// let empresa=ref('cotrasaravita')
 
 export default {
   setup () {
