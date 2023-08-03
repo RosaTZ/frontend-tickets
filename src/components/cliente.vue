@@ -80,18 +80,16 @@
         </div>
     </div>
     <!-- modal buscar cliente -->
+    <!-- modal buscar cliente -->
     <div class="modal-bg" id="modal" v-if="buscarClient===true">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>{{ name }}</h2>
-                <div v-if="alertaError===true">
-                  {{ alerta }}
-                </div>
-            </div>
-            <div class="modal-body">
-              <h6 id="tituloTabla">Clientes </h6>
-            <div class="table-container">
+            <div class="modal-body" v-for="p in buscar" :key="p">
+              <h6 id="tituloTabla">Cliente {{ p.nombre }} </h6>
+            <div class="table-container"  >
+
+           
           <table class="custom-table">
+            
         <thead>
           <tr>
             <th>Cedula</th>
@@ -100,19 +98,18 @@
             <th>Telefono</th>
             <th>Editar</th>
             <th>Estado</th>
+
+
           </tr>
         </thead>
         <tbody>
-          <tr v-for="p in buscar.cliente" :key="p">
+          <tr>
             <td>{{ p.cedula }}</td>
             <td>{{ p.nombre }}</td>
             <td>{{ p.apellidos }}</td>
             <td>{{ p.telefono }}</td>
             <td><button @click="editarCliente(p)">Edit</button></td>
-            <div @click="cambiarEstado(p)">
-            <td v-if="p.estado===1"><button>Activo</button></td>
-          <td v-else><button>Inactivo</button></td>
-          </div>
+            <td>1</td>
           </tr>
         </tbody>
       </table>
@@ -121,7 +118,7 @@
 
             </div>
             <div class="modal-buttons">
-                <button id="closeModalBtn" @click="buscarClient=false">Cerrar</button>
+                <button id="closeModalBtn" @click="buscarClient=false , cc=''">Cerrar</button>
                 <button id="saveBtn" @click="guardarEdicion()">Guardar</button>
             </div>
         </div>
