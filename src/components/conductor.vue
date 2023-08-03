@@ -85,9 +85,9 @@
       <div class="modal-content">
           <div class="modal-header">
               <h2>Agregar Cliente</h2>
-              <div v-if="alertaError===true">
+              <!-- <div v-if="alertaError===true">
                 {{ alerta }}
-              </div>
+              </div> -->
           </div>
           <div class="modal-body">
             <input type="text" v-model="cedula" placeholder="cedula" />
@@ -169,67 +169,8 @@ let conductores = ref([]);
 let buscar = ref([]);
 const useConductor = useConductorStore();
 
-function quitar() {
-  setTimeout(() => {
-    alerta.value=''
-    alertaError.value=false
-  }, 3000);
-}
-
-function validarCampos() {
-  if (cedula.value.trim() ==='' || cedula.value.length<8 ||cedula.value.length>10) {
-      alertaError.value=true
-      alerta.value='cedula incorrecta'
-      quitar()
-      
-  }else if (nombre.value.trim() ==='') {
-      alertaError.value=true
-      alerta.value='Complete el campo nombre'
-      quitar()
-  }else if( apellidos.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo apellido' 
-      quitar()
-  }else if( telefono.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo telefono' 
-      quitar()
-  }else if( licencia.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo licencia' 
-      quitar()
-  }else if( direccion.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo direccion' 
-      quitar()
-  }else if( estado_civil.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo estado civil' 
-      quitar()
-  }else if( tipo_seguro.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo tipo seguro' 
-      quitar()
-  }else if( aseguradora.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo aseguradora' 
-      quitar()
-  }else if( valor.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo valor del seguro' 
-      quitar()
-  }else if( descripcion.value.trim() ===''){
-      alertaError.value=true
-      alerta.value='Complete el campo descripcion' 
-      quitar()
-  }else{
-      return true
-  }
-  
-}
 
 async function registrarConductor() {
-  if (validarCampos()===true){
       console.log("entre");
 let res = await useConductor.registrarConductor({
   cedula: cedula.value,
@@ -252,7 +193,7 @@ let res = await useConductor.registrarConductor({
 });
 console.log(res);
 buscarConductor()
-}
+
 }
 
 async function buscarConductor() {
