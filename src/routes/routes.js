@@ -1,5 +1,5 @@
 import menu from "../components/Menu.vue";
-import login from "../components/Login.vue";
+// import login from "../components/Login.vue";
 import infoEmpresa from "../components/InformacionEmpresa.vue"
 import clientes from "../components/cliente.vue"
 import revision from "../components/Revision.vue"
@@ -11,7 +11,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import conductores from '../components/Conductores.vue'
 
 const routes = [
-    {path: "/",component: login},
+    // {path: "/",component: login},
     {path: "/menu",component: menu,
       children: [
         { path: "", redirect: "/menu" },
