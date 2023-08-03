@@ -1,6 +1,6 @@
 import menu from "../components/Menu.vue";
-import login from "../src/components/login.vue";
-import infoEmpresa from "../src/components/empresa.vue"
+import login from "../components/login.vue";
+import infoEmpresa from "../components/empresa.vue"
 import clientes from "../components/cliente.vue"
 import revision from "../components/revision.vue"
 import rutas from "../components/rutas.vue"
@@ -8,7 +8,7 @@ import ticket from "../components/ticket.vue"
 import vehiculos from "../components/vehiculos.vue"
 import ventas from "../components/Venta.vue"
 import { createRouter, createWebHashHistory } from 'vue-router';
-import conductores from '../components/Conductores.vue'
+import conductores from '../components/conductor.vue'
 
 const routes = [
     {path: "/",component: login},
