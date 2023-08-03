@@ -6,7 +6,7 @@ export const useRutaStore = defineStore("ruta",()=>{
 
     const registrarRuta = async(info)=>{
         try {
-            let datos = await axios.post("http://localhost:4000/api/ruta",info)
+            let datos = await axios.post("https://backend-i3b9.onrender.com/api/ruta",info)
             return datos
         } catch (error) {
             console.log(error);
@@ -15,7 +15,7 @@ export const useRutaStore = defineStore("ruta",()=>{
 
     const buscarRuta=async()=> {
       try {
-        const buscar= await axios.get(`http://localhost:4000/api/ruta`)
+        const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/ruta`)
          console.log(buscar.data.buscar);
          return buscar.data.buscar
       } catch (error) {
@@ -25,7 +25,7 @@ export const useRutaStore = defineStore("ruta",()=>{
         
         const buscarRutaId = async (id) => {
           try {
-            let response = await axios.get(`http://localhost:4000/api/ruta/${id}`, {
+            let response = await axios.get(`https://backend-i3b9.onrender.com/api/ruta/${id}`, {
               params: { _id: id },
             });
             console.log(response.data);
@@ -36,7 +36,7 @@ export const useRutaStore = defineStore("ruta",()=>{
         };
         const editarRuta = async (id, origen, destino, salida, tiempo) => {
           try {
-            const response = await axios.put(`http://localhost:4000/api/ruta/${id}`, {
+            const response = await axios.put(`https://backend-i3b9.onrender.com/api/ruta/${id}`, {
               origen:origen,
               destino:destino,
               salida:salida,
@@ -50,7 +50,7 @@ export const useRutaStore = defineStore("ruta",()=>{
 
         const cambiarEstado= async (id,estado)=>{
           try {
-            let res= await axios.patch(`http://localhost:4000/api/ruta/${id}`,
+            let res= await axios.patch(`https://backend-i3b9.onrender.com/api/ruta/${id}`,
             {estado:estado})
             console.log(res.data);
             return res.data
