@@ -1,35 +1,44 @@
-import login from "../components/login.vue"
-import administrador from "../components/administrador.vue"
-import inicio from "../components/inicio.vue"
-import cliente from "../components/cliente.vue"
-import conductor from "../components/conductor.vue"
-import empresa from "../components/empresa.vue"
-import revision from "../components/revision.vue"
-import rutas from "../components/rutas.vue"
-import ticket from "../components/ticket.vue"
-import vehiculo from "../components/vehiculo.vue"
-import vendedor from "../components/vendedor.vue"
+import menu from '../components/Menu.vue';
+import login from '../components/Login.vue';
+import infoEmpresa from "../components/InformacionEmpresa.vue"
+import clientes from "../components/cliente.vue"
+import revision from "../components/Revision.vue"
+import rutas from "../components/Rutas.vue"
+import ticket from "../components/Ticket.vue"
+import vehiculos from "../components/vehiculos.vue"
+import ventas from "../components/Venta.vue"
+import { compile } from 'vue';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import conductores from '../components/Conductores.vue'
 
-import {createRouter , createWebHashHistory} from 'vue-router'
+const routes = [
+    {path: "/",component: login,},
+    {path: "/menu",component: menu,
+      children: [
+        { path: "", redirect: "/menu" },
+        { path: "/infoEmpresa", component: infoEmpresa },
+        { path: "/clientes", component: clientes },
+        { path: "/conductores", component: conductores },
+        {path : "/revision" , component : revision},
+        {path : "/rutas" , component :rutas},
+        {path : "/ticket" , component :ticket},
+        {path : "/vehiculos" , component : vehiculos},
+        {path : "/venta" , component : ventas}
 
-const routes =[
-    {path : "/", component : login  },
-    {path : "/admin" , component: administrador},
-    {path : "/inicio" , component: inicio},
-    {path : "/cliente" , component: cliente},
-    {path : "/conductor" , component: conductor},
-    {path : "/empresa" , component: empresa},
-    {path : "/revision" , component: revision},
-    {path : "/rutas" , component: rutas},
-    {path : "/ticket" , component: ticket},
-    {path : "/vehiculo" , component: vehiculo},
-    {path : "/vendedor" , component: vendedor}
+      ],
+    },
+  ];
+export const router = createRouter({
+    history: createWebHashHistory(),
+    routes,
+});
 
-]
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = sessionStorage.getItem('token') !== null;
 
-export const router = createRouter(
-    {
-        history : createWebHashHistory(),
-        routes
-    }
-)
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/',{ name: 'no-auth-message' });
+  } else {
+    next();
+  }
+});

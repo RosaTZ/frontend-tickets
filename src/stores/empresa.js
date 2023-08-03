@@ -2,7 +2,6 @@ import {defineStore} from "pinia"
 import axios from "axios"
 
 export const useEmpresaStore = defineStore("empresa",()=>{
-    let data= ""
 
     const registrarEmpresa = async(info)=>{
         try {
@@ -13,18 +12,23 @@ export const useEmpresaStore = defineStore("empresa",()=>{
         }
     }
 
-    async function buscarEmpresa() {
-        const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/empresa`)
-         console.log(buscar);
+   const buscarEmpresa= async()=> {
+    try {
+      const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/empresa`)
+      console.log(buscar.data.buscar);
+      return buscar.data.buscar
+    } catch (error) {
+      console.log(error);
+    } 
         }
         
-        const buscarEmpresaId = async (id) => {
+        const buscarEmpresaNit = async (nit) => {
           try {
-            let response = await axios.get(`https://backend-i3b9.onrender.com/api/empresa/${id}`, {
-              params: { _id: id },
+            let response = await axios.get(`https://backend-i3b9.onrender.com/api/empresa/${nit}`, {
+              params: { nit: nit },
             });
-            console.log(response.data);
-            return response.data;
+            console.log(response.data.empresa);
+            return response.data.empresa;
           } catch (error) {
             console.log(error);
           }
@@ -32,36 +36,24 @@ export const useEmpresaStore = defineStore("empresa",()=>{
 
         const editarEmpresa = async (id, nombre, direccion, telefono, propietario) => {
           try {
-            const response = await axios.put(`https://backend-i3b9.onrender.com/api/empresa/:${id}`, {
+            const response = await axios.put(`https://backend-i3b9.onrender.com/api/empresa/${id}`, {
               nombre:nombre,
               direccion:direccion,
               telefono:telefono,
-              direccion:propietario
+              propietario:propietario
             });
-            return response.data;
+            console.log(response.data.response);
+            return response.data.response;
           } catch (error) {
             console.error('Error al editar el cliente:', error);
             throw error;
           }
         };
 
-        const eliminarEmpresa = async (id)=>{
-          try {
-            let response = await axios.delete(`https://backend-i3b9.onrender.com/api/empresa/${id}`, {
-              params: { _id:id },
-            });
-            console.log(response.data);
-            return response.data;
-          } catch (error) {
-            console.log(error);
-          }
-        }
-
         return{
             registrarEmpresa,
             buscarEmpresa,
-            buscarEmpresaId,
-            editarEmpresa,
-            eliminarEmpresa
+            buscarEmpresaNit,
+            editarEmpresa
         }
-})
+      })

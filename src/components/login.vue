@@ -1,88 +1,148 @@
 <template>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">
-    
-                <div class="card mt-5" style="width: 33rem; height : 26rem">
-                    <div class="card-body">
-                    <h6 class="card-title" id="uno">cootrasaravita</h6>
-                    <img src="../imagenes/autobus.png" alt="" class="card-image">
-                    <div class="botones">
-    
-                        <button class="btn btn-warning" ><router-link to="/admin" id="admin">Administrador</router-link></button>
-                        <button class="btn btn-info"  ><router-link to="/vendedor" id="admin"> Vendedor</router-link></button>
-    
-                    </div>
-    
-                    </div>
+    <q-layaut>
+      <div class="login-box">
+        <img src="../imagenes/fondo-perfil.jpg" class="avatar" alt="Avatar Image">
+        <h1>Login Here</h1>
+        <form>
+          <!-- USERNAME INPUT -->
+          <label for="username" >Usuario</label>
+          <input type="text" placeholder="Enter Username" v-model="correo">
+          <!-- PASSWORD INPUT -->
+          <label for="password">Password</label>
+          <input type="password" placeholder="Enter Password" v-model="clave">
+  
+          <router-link :to="ruta" @click="validarAdministrador()"> 
+              <q-btn color="secondary" label="Cliente" /> 
+             </router-link>
+             <br>
+          <a href="#">Lost your Password?</a><br>
+          <a href="#">Don't have An account?</a>
+        </form>
+        <div v-if="mostrarMensaje===true">
+                  <span>{{ mensaje }}</span>
                 </div>
-    
-            </div>
-            <div class="col"></div>
-        </div>
-    </div>
-    
-        
-    </template>
-    <script setup>
-    
-    
-    </script>
-    <style>
-    *{
-        margin: 0;
-        padding: 0;
+      </div>
+      <router-view></router-view>
+    </q-layaut>
+  </template>
+  <script setup>
+  import {ref} from 'vue'
+  import { useRouter } from 'vue-router';
+  import {useAdminStore} from "../stores/administrador.js"
+  let ruta = ref("")
+  let correo=ref('')
+  let clave=ref('')
+  let mensaje=ref('')
+  let mostrarMensaje=ref(false)
+  const useAdmin=useAdminStore()
+  
+  const router = useRouter();
+  
+  
+  async function validarAdministrador() { 
+    const email=correo.value
+    const password=clave.value
+    const validar =await useAdmin.validarAdministrador({email,password});
+    console.log(validar);
+     if(validar){
+      ruta.value='/infoEmpresa'
+      router.push(ruta.value);
+      console.log(validar);
+      return validar;
+     }else{
+      mensaje.value='Correo o Contraseña incorrectos'
+      setTimeout(function() {
+        mostrarMensaje.value=true
+      }, 3000);
+     }
     }
-    .card-header {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          
-          
-        }
-        
-        .button {
-          padding: 10px 20px;
-          font-size: 18px;
-          margin: 0 10px;
-          width: 25vh;
-        }
-        
-        @media (max-width: 768px) {
-          .container {
-            flex-direction: column;
-          }
-        }
-    .card-image{
-        display: block;
-        margin: auto;
-        align-content: center;
-    }
-    
-    #uno{
-        text-align: center;
-        align-items: center;
-        font-weight: 600;
-        font-size: 30px;
-        border-bottom: 2px  solid rgb(57, 207, 248);
-        
-    
-    }
-    
-    #admin{
-        text-decoration: none;
-        color:  #3d3c3c;
-    }
-    
-    .botones{
-      display: flex;
-      justify-content: center;
-      margin: 5px 10px; /* Ajusta el margen horizontal según tus necesidades */
-      padding: 10px 20px;
-      gap: 2vh;
-    
-    
-    }
-    
-    </style>
+  </script>
+  
+  <style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: url(../img/bg.jpeg) no-repeat center top;
+    background-size: cover;
+    font-family: sans-serif;
+    height: 100vh;
+  }
+  
+  .login-box {
+    width: 320px;
+    height: 500px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+  }
+  
+  .login-box .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+  }
+  
+  .login-box h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+  }
+  
+  .login-box label {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .login-box input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .login-box input[type="text"], .login-box input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .login-box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #b80f22;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+  }
+  
+  .login-box input[type="submit"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+  }
+  
+  .login-box a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+  }
+  
+  .login-box a:hover {
+    color: #fff;
+  }
+  </style>

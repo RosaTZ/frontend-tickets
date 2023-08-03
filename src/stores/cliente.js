@@ -2,20 +2,29 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 export const useClienteStore = defineStore("Cliente", () => {
- 
+ let errors=[]
   const registrarCliente = async (info) => {
     try {
       let datos = await axios.post("https://backend-i3b9.onrender.com/api/cliente", info);
+      console.log(datos);
       return datos;
     } catch (error) {
-      console.log(error);
+      // errors=[]
+      error.response.data.errors.forEach(e => {
+        errors.push(e.msg)
+      });
+
     }
   };
-
-  async function buscarCliente() {
-    const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/cliente`)
-     console.log(buscar.data);
-    return buscar.data
+  const buscarCliente= async()=> {
+    try {
+      const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/cliente`)
+     console.log(buscar.data.buscar);
+     return buscar.data.buscar
+    
+    } catch (error) {
+      return error.response.data
+    }
     }
     
     const buscarClienteCedula = async (cedula) => {
@@ -26,39 +35,38 @@ export const useClienteStore = defineStore("Cliente", () => {
         console.log(response.data);
         return response.data;
       } catch (error) {
-        console.log(error);
+        return error.response.data
       }
     };
   
-  const editarCliente = async (cedula, telefono) => {
+  const editarCliente = async (id, telefono) => {
     try {
-      const response = await axios.put(`https://backend-i3b9.onrender.com/api/conductor:${cedula}`, {
-        telefono: telefono,
+      const response = await axios.put(`https://backend-i3b9.onrender.com/api/cliente/${id}`, {
+        telefono:telefono
       });
-      return response.data;
+      return response;
     } catch (error) {
-      console.error('Error al editar el cliente:', error);
-      throw error;
+      return error.response.data
     }
   };
 
-  const eliminarCliente = async (id)=>{
-    try {
-      let response = await axios.delete(`mongodb+srv://apptareas:9b3eGbfT49z2TJED@ticket.gwsg10h.mongodb.net/?retryWrites=true&w=majority/api/cliente/${id}`, {
-        params: { _id:id },
-      });
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
+  const cambiarEstado= async (id,estado)=>{
+try {
+  let res= await axios.patch(`https://backend-i3b9.onrender.com/api/cliente/${id}`,
+  {estado:estado})
+  console.log(res.data);
+  return res.data
+} catch (error) {
+  return error.response.data
+}
   }
 
   return {
     registrarCliente,
+    errors,
     buscarCliente,
     buscarClienteCedula,
     editarCliente,
-    eliminarCliente
+    cambiarEstado
   };
 });

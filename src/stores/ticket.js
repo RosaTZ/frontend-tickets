@@ -2,7 +2,6 @@ import {defineStore} from "pinia"
 import axios from "axios"
 
 export const useTicketStore = defineStore("ticket",()=>{
-    let data= ""
 
     const registrarTicket = async(info)=>{
         try {
@@ -13,9 +12,14 @@ export const useTicketStore = defineStore("ticket",()=>{
         }
     }
 
-    async function buscarTicket() {
+    const buscarTicket= async () => {
+      try {
         const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/ticket`)
-         console.log(buscar);
+        console.log(buscar.data.buscar);
+        return buscar.data.buscar
+      } catch (error) {
+        console.log(error);
+      }
         }
         
         const buscarTicketId = async (id) => {
@@ -30,35 +34,33 @@ export const useTicketStore = defineStore("ticket",()=>{
           }
         };
 
-        const editarTicket = async (id, fecha_salida) => {
+        const editarTicket = async (id, fecha_salida,numero_puesto) => {
           try {
-            const response = await axios.put(`https://backend-i3b9.onrender.com/api/ticket/:${id}`, {
-              fecha_salida
+            const response = await axios.put(`https://backend-i3b9.onrender.com/api/ticket/${id}`, {
+              fecha_salida:fecha_salida,
+              numero_puesto:numero_puesto
             });
             return response.data;
           } catch (error) {
-            console.error('Error al editar el cliente:', error);
-            throw error;
+            console.error('Error al editar el Ticket:', error);
           }
         };
-
-        const eliminarTicket = async (id)=>{
+        const cambiarEstado= async (id,estado)=>{
           try {
-            let response = await axios.delete(`https://backend-i3b9.onrender.com/api/ticket/${id}`, {
-              params: { _id:id },
-            });
-            console.log(response.data);
-            return response.data;
+            let res= await axios.patch(`https://backend-i3b9.onrender.com/api/ticket/${id}`,
+            {estado:estado})
+            console.log(res.data);
+            return res.data
           } catch (error) {
             console.log(error);
           }
-        }
+            }
 
     return{
         registrarTicket,
         buscarTicket,
         buscarTicketId,
         editarTicket,
-        eliminarTicket
+        cambiarEstado
     }
 })

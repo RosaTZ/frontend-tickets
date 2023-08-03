@@ -13,9 +13,14 @@ export const useVededorStore = defineStore("vendedor",()=>{
         }
     }
 
-    async function buscarVendedor() {
+    const buscarVendedor= async () => {
+      try {
         const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/vendedor`)
-         console.log(buscar);
+        console.log(buscar.data.buscar);
+        return buscar.data.buscar
+      } catch (error) {
+        console.log(error);
+      }
         }
         
         const buscarVendedorId = async (id) => {
@@ -32,32 +37,19 @@ export const useVededorStore = defineStore("vendedor",()=>{
 
         const editarVendedor = async (id, nombre, email, telefono, password ) => {
           try {
-            const response = await axios.put(`https://backend-i3b9.onrender.com/api/vendedor/:${id}`, {
+            const response = await axios.put(`https://backend-i3b9.onrender.com/api/vendedor/${id}`, {
              nombre, email, telefono, password
             });
             return response.data;
           } catch (error) {
             console.error('Error al editar el cliente:', error);
-            throw error;
           }
         };
-
-    const eliminarVendedor = async (id)=>{
-        try {
-          let response = await axios.delete(`https://backend-i3b9.onrender.com/api/vendedor/${id}`, {
-            params: { _id:id },
-          });
-          console.log(response.data);
-          return response.data;
-        } catch (error) {
-          console.log(error);
-        }
-      }
     return{
         registrarVendedor,
         buscarVendedor,
         buscarVendedorId,
         editarVendedor,
-        eliminarVendedor
+        editarVendedor
     }
 })
