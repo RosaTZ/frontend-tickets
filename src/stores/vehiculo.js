@@ -15,7 +15,7 @@ export const useVehiculoStore = defineStore("vehiculo",()=>{
     const buscarVehiculo= async () => {
       try {
         const buscar= await axios.get(`https://backend-i3b9.onrender.com/vehiculo`)
-        console.log(buscar.data);
+        buscar.data.reverse()
         return buscar.data
       } catch (error) {
         console.log(error);

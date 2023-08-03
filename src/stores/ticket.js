@@ -15,7 +15,7 @@ export const useTicketStore = defineStore("ticket",()=>{
     const buscarTicket= async () => {
       try {
         const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/ticket`)
-        console.log(buscar.data.buscar);
+buscar.data.buscar.reverse()
         return buscar.data.buscar
       } catch (error) {
         console.log(error);

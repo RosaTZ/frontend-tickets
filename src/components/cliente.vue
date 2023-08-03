@@ -83,7 +83,7 @@
     <!-- modal buscar cliente -->
     <div class="modal-bg" id="modal" v-if="buscarClient===true">
         <div class="modal-content">
-            <div class="modal-body" v-for="p in buscar" :key="p">
+            <div class="modal-body" v-for="p in buscar.cliente" :key="p">
               <h6 id="tituloTabla">Cliente {{ p.nombre }} </h6>
             <div class="table-container"  >
 
@@ -109,7 +109,10 @@
             <td>{{ p.apellidos }}</td>
             <td>{{ p.telefono }}</td>
             <td><button @click="editarCliente(p)">Edit</button></td>
-            <td>1</td>
+            <div @click="cambiarEstado(p)">
+            <td v-if="p.estado===1"><button>Activo</button></td>
+          <td v-else><button>Inactivo</button></td>
+          </div>
           </tr>
         </tbody>
       </table>

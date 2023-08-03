@@ -13,6 +13,7 @@ export const useConductorStore = defineStore("conductor", () => {
   const buscarConductor = async () => {
     try {
       const buscar = await axios.get(`https://backend-i3b9.onrender.com/api/conductor`);
+      buscar.data.buscar.reverse()
       return buscar.data.buscar;
     } catch (error) {
       console.log(error);

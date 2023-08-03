@@ -2,7 +2,6 @@ import {defineStore} from "pinia"
 import axios from "axios"
 
 export const useRutaStore = defineStore("ruta",()=>{
-    let data= ""
 
     const registrarRuta = async(info)=>{
         try {
@@ -17,6 +16,7 @@ export const useRutaStore = defineStore("ruta",()=>{
       try {
         const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/ruta`)
          console.log(buscar.data.buscar);
+         buscar.data.buscar.reverse()
          return buscar.data.buscar
       } catch (error) {
         console.log(error);
