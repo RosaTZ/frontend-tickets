@@ -11,18 +11,18 @@
               <table class="custom-table">
               <thead>
               <tr>
-                <td>Cedula</td>
-        <td>Nombre</td>
-        <td>Apellidos</td>
-        <td>Fecha de nacimiento</td>
-        <td>Direccion</td>
-        <td>Estado civil</td>
-        <td>Telefono</td>
-        <td>Licencia</td>
-        <td>Categoria Licencia</td>
-        <td>Fecha de vencimiento</td>
-        <td>Editar</td>
-        <td>Estado</td>
+                <th>Cedula</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Fecha de nacimiento</th>
+        <th>Direccion</th>
+        <th>Estado civil</th>
+        <th>Telefono</th>
+        <th>Licencia</th>
+        <th>Categoria Licencia</th>
+        <th>Fecha de vencimiento</th>
+        <th>Editar</th>
+        <th>Estado</th>
               </tr>
               </thead>
               <tbody>
