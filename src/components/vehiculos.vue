@@ -199,7 +199,7 @@ async function registrarVehiculo() {
   }); 
   console.log(res);
   buscarVehiculo()
-  limpiarCampos()
+  // limpiarCampos()
 }
 function limpiarCampos() {
   matricula.value='',
