@@ -39,9 +39,12 @@ export const useClienteStore = defineStore("Cliente", () => {
       }
     };
   
-  const editarCliente = async (id, telefono) => {
+  const editarCliente = async (id,cedula,nombre, apellidos, telefono) => {
     try {
       const response = await axios.put(`https://backend-i3b9.onrender.com/api/cliente/${id}`, {
+        cedula:cedula,
+        nombre:nombre,
+        apellidos:apellidos,
         telefono:telefono
       });
       return response;

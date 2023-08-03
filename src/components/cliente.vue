@@ -127,7 +127,7 @@
         </div>
     </div>
 
-    <!-- Editar telefono -->
+    <!-- Editar cliente -->
     <div class="modal-bg" id="modal" v-if="modalEditar===true">
         <div class="modal-content">
             <div class="modal-header">
@@ -138,7 +138,10 @@
                 
             </div>
             <div class="modal-body">
-              <input type="text" v-model="numTelefono" placeholder="telefono" />
+              <input type="text" v-model="cedula" placeholder="Cedula">
+              <input type="text" v-model="nombre" placeholder="Nombre">
+              <input type="text" v-model="apellido" placeholder="Apellidos">
+              <input type="text" v-model="telefono" placeholder="telefono" />
             </div>
             <div class="modal-buttons">
                 <button id="closeModalBtn" @click="modalEditar=false">Cerrar</button>
@@ -194,23 +197,9 @@ async function registrarCliente() {
    telefono: telefono.value,
  });
  console.log(res);
-//  limpiarCampos()
-//  buscarCliente()
-
+ limpiarCampos()
+ buscarCliente()
 }
-  // async function registrarCliente() {
- 
-  //   let res = await useCliente.registrarCliente({
-  //     cedula: cedula.value,
-  //     nombre: nombre.value,
-  //     apellidos: apellido.value,
-  //     telefono: telefono.value,
-  //   });
-  //   console.log(res);
-  //   // limpiarCampos()
-  //   buscarCliente()
-  
-  // }
   function limpiarCampos() {
     cedula.value=''
     nombre.value=''
@@ -232,7 +221,10 @@ async function registrarCliente() {
   
   async function editarCliente(p){
   idEditar.value=p._id
-  numTelefono.value=p.telefono
+  cedula.value=p.cedula
+  nombre.value=p.nombre
+  apellido.value=p.apellidos
+  telefono.value=p.telefono
   modalEditar.value=true
   modalRegistrar.value=false
   console.log(idEditar.value);

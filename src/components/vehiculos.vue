@@ -21,7 +21,6 @@
                   <th>Placa</th>
                   <th>Número del vehiculo</th>
                   <th>Propietario</th>
-                  <th>Tarjeta de propiedad</th>
                   <th>Puestos</th>
                   <th>Nombre conductor</th>
                   <th>tecnomecanica</th>
@@ -35,7 +34,6 @@
                   <td>{{ p.placa }}</td>
                   <td>{{ p.num_vehiculo }}</td>
                   <td>{{ p.propietario }}</td>
-                  <td>{{ p.tarjeta_propiedad }}</td>
                   <td>{{ p.puestos }}</td>
                   <td>{{ p.conductor_id.nombre }}</td>
                   <td>{{ p.revision_id.tecnomecanica }}</td>
@@ -71,8 +69,6 @@
       <span>{{ b.num_vehiculo }}</span>
       <span>Propietario</span>
       <span>{{ b.propietario }}</span>
-      <span>Tarjeta de propiedad</span>
-      <span>{{ b.tarjeta_propiedad }}</span>
       <span>Número puestos</span>
       <span>{{ b.puestos }}</span>
       </div>
@@ -113,7 +109,6 @@
           <input type="text" v-model="placa" placeholder="Placa del vehiculo">
           <input type="text" v-model="num_vehiculo" placeholder="Número del vehiculo" />
           <input type="text" v-model="propietario" placeholder="propietario" />
-          <input type="text" v-model="tarjeta_propiedad" placeholder="Número tarjeta de propiedad" />
           <span>Número de puestos</span>
           <input type="number" v-model="puestos" placeholder="Número de puestos">
         </div>
@@ -166,7 +161,6 @@ let matricula = ref("");
 let placa=ref('')
 let num_vehiculo = ref("");
 let propietario = ref("");
-let tarjeta_propiedad = ref("");
 let puestos=ref(0)
 let conductorId=ref('')
 let revisionId=ref('')
@@ -198,7 +192,6 @@ async function registrarVehiculo() {
     placa:placa.value,
     num_vehiculo: num_vehiculo.value,
     propietario: propietario.value,
-    tarjeta_propiedad: tarjeta_propiedad.value,
     puestos:puestos.value,
     conductor_id: conductorId.value,
     revision_id:revisionId.value,
@@ -213,7 +206,6 @@ function limpiarCampos() {
   placa.value=''
   num_vehiculo.value='',
   propietario.value='',
-  tarjeta_propiedad.value='',
   puestos.value=''
   }
 async function buscarVehiculo() {
