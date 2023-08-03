@@ -34,12 +34,22 @@ export const useVehiculoStore = defineStore("vehiculo",()=>{
           }
         };
 
-        const editarVehiculo = async (id,placa,num_vehiculo, propietario  ) => {
+        const editarVehiculo = async (id, matricula,
+          placa,
+          num_vehiculo,
+          propietario,
+          puestos,
+          conductor_id,
+          revision_id ) => {
           try {
             const response = await axios.put(`https://backend-i3b9.onrender.com/vehiculo/${id}`, {
+              matricula:matricula,
               placa:placa,
               num_vehiculo:num_vehiculo,
-              propietario:propietario
+              propietario:propietario,
+              puestos:puestos,
+              conductor_id:conductor_id,
+              revision_id:revision_id
             });
             console.log(response);
             return response;

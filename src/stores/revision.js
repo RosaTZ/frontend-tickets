@@ -2,7 +2,6 @@ import {defineStore} from "pinia"
 import axios from "axios"
 
 export const useRevisionStore = defineStore("revision",()=>{
-    let data= ""
 
     const registrarRevision = async(info)=>{
         try {
@@ -36,11 +35,13 @@ export const useRevisionStore = defineStore("revision",()=>{
           }
         };
 
-        const editarRevision = async (id, tecnomecanica, fecha_proxima_revision) => {
+        const editarRevision = async (id, tecnomecanica,fecha_revision, fecha_proxima_revision,descripcion) => {
           try {
             const response = await axios.put(`https://backend-i3b9.onrender.com/api/revision/${id}`, {
              tecnomecanica:tecnomecanica,
-             fecha_proxima_revision:fecha_proxima_revision
+             fecha_revision:fecha_revision,
+             fecha_proxima_revision:fecha_proxima_revision,
+             descripcion:descripcion
             });
             console.log(response.data);
             return response.data;

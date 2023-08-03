@@ -35,22 +35,29 @@ export const useConductorStore = defineStore("conductor", () => {
     }
   };
   const editarConductor = async (
-    id,
+    cedula,
+    nombre,
     telefono,
-    direccion,
-    estado_civil,
     licencia,
-    categoria_licencia
+    categoria_licencia,
+    fecha_vencimiento,
+    fecha_nacimiento,
+    direccion,
+    estado_civil
   ) => {
     try {
       const response = await axios.put(
         `https://backend-i3b9.onrender.com/api/conductor/${id}`,
         {
+          cedula:cedula,
+          nombre:nombre,
           telefono: telefono,
-          direccion: direccion,
-          estado_civil: estado_civil,
           licencia: licencia,
           categoria_licencia: categoria_licencia,
+          fecha_vencimiento:fecha_vencimiento,
+          fecha_nacimiento:fecha_nacimiento,
+          direccion: direccion,
+          estado_civil: estado_civil
         }
       );
       return response.data;

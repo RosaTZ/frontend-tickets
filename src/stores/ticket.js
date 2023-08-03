@@ -34,10 +34,23 @@ buscar.data.buscar.reverse()
           }
         };
 
-        const editarTicket = async (id, fecha_salida,numero_puesto) => {
+        const editarTicket = async (id,fecha_venta,
+          fecha_salida,
+          hora_salida,
+          duracion,
+          cliente,
+          vehiculo,
+          ruta,
+          numero_puesto) => {
           try {
             const response = await axios.put(`https://backend-i3b9.onrender.com/api/ticket/${id}`, {
+              fecha_venta:fecha_venta,
               fecha_salida:fecha_salida,
+              hora_salida:hora_salida,
+              duracion:duracion,
+              cliente:cliente,
+              vehiculo:vehiculo,
+              ruta:ruta,
               numero_puesto:numero_puesto
             });
             return response.data;

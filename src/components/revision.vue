@@ -33,13 +33,7 @@
                   <td>{{ p.fecha_revision }}</td>
                   <td>{{ p.fecha_proxima_revision }}</td>
                   <td>{{ p.descripcion }}</td>
-                  <td>
-                    <i
-                      class="fa-regular fa-pen-to-square"
-                      @click="editarRevision(p)"
-                      id="editar"
-                    ></i>
-                  </td>
+                  <td><i class="fa-regular fa-pen-to-square" @click="editarRevision(p)" id="editar" ></i></td>
                   <div @click="cambiarEstado(p)">
                     <td v-if="p.estado === 1"><button>Activo</button></td>
                     <td v-else><button>Inactivo</button></td>
@@ -117,21 +111,24 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2>Editar cliente {{ name }}</h2>
-          <div v-if="alertaError === true">
-            {{ alerta }}
-          </div>
         </div>
         <div class="modal-body">
+          <span>Tecnomecanica</span>
+          <input type="text" v-model="tecnomecanica" placeholder="" />
+          <span>Fecha de la revision</span>
           <input
-            type="text"
-            v-model="tecnomecanica"
-            placeholder="Tecnomecanica"
+            type="date"
+            v-model="fecha_revision"
+            placeholder="Fecha revisión"
           />
+          <span>Fecha proxima revision</span>
           <input
             type="date"
             v-model="fecha_proxima_revision"
             placeholder="Fecha de la siguiente revisión"
           />
+          <span>Descripcion</span>
+          <input type="text" v-model="descripcion" placeholder="" />
         </div>
         <div class="modal-buttons">
           <button id="closeModalBtn" @click="modalEditar = false">
@@ -189,7 +186,9 @@ async function buscarRevisionId() {
 async function editarRevision(p) {
   idEditar.value = p._id;
   tecnomecanica.value = p.tecnomecanica;
+  fecha_revision.value=p.fecha_revision
   fecha_proxima_revision.value = p.fecha_proxima_revision;
+  descripcion.value=p.descripcion
   modalEditar.value = true;
   modalRegistrar.value = false;
   console.log(idEditar.value);

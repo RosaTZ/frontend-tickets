@@ -221,9 +221,13 @@ async function buscarVehiculoId() {
 }
 async function editarVehiculo(p) {
   idEditar.value = p._id;
+  matricula.value=p.matricula,
   placa.value=p.placa,
   num_vehiculo.value=p.num_vehiculo,
   propietario.value=p.propietario,
+  puestos.value=p.puestos,
+  conductorId.value=p.conductor_id,
+  revisionId.value=p.revision_id,
   modalEditar.value = true;
   modalRegistrar.value = false;
   modalBuscar.value=false
@@ -232,9 +236,13 @@ async function editarVehiculo(p) {
 async function guardarEdicion() {
   const res = await useVehiculo.editarVehiculo(
     idEditar.value,
+    matricula.value,
     placa.value,
     num_vehiculo.value,
-    propietario.value
+    propietario.value,
+    puestos.value,
+    conductorId.value,
+    revisionId.value
   );
   console.log(res.data);
   buscarVehiculo() 
