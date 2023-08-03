@@ -5,7 +5,7 @@ export const useVehiculoStore = defineStore("vehiculo",()=>{
 
     const registrarVehiculo = async(info)=>{
         try {
-            const datos = await axios.post("https://backend-i3b9.onrender.com/vehiculo",info)
+            const datos = await axios.post("https://backend-i3b9.onrender.com/api/vehiculo",info)
             return datos
         } catch (error) {
             console.log(error);
@@ -14,7 +14,7 @@ export const useVehiculoStore = defineStore("vehiculo",()=>{
 
     const buscarVehiculo= async () => {
       try {
-        const buscar= await axios.get(`https://backend-i3b9.onrender.com/vehiculo`)
+        const buscar= await axios.get(`https://backend-i3b9.onrender.com/api/vehiculo`)
         buscar.data.reverse()
         return buscar.data
       } catch (error) {
@@ -24,7 +24,7 @@ export const useVehiculoStore = defineStore("vehiculo",()=>{
         
         const buscarVehiculoId = async (id) => {
           try {
-            let response = await axios.get(`https://backend-i3b9.onrender.com/vehiculo/${id}`, {
+            let response = await axios.get(`https://backend-i3b9.onrender.com/api/vehiculo/${id}`, {
               params: { _id: id },
             });
             console.log(response.data);
@@ -42,7 +42,7 @@ export const useVehiculoStore = defineStore("vehiculo",()=>{
           conductor_id,
           revision_id ) => {
           try {
-            const response = await axios.put(`https://backend-i3b9.onrender.com/vehiculo/${id}`, {
+            const response = await axios.put(`https://backend-i3b9.onrender.com/api/vehiculo/${id}`, {
               matricula:matricula,
               placa:placa,
               num_vehiculo:num_vehiculo,
@@ -60,7 +60,7 @@ export const useVehiculoStore = defineStore("vehiculo",()=>{
 
         const cambiarEstado= async (id,estado)=>{
           try {
-            let res= await axios.patch(`https://backend-i3b9.onrender.com/vehiculo/${id}`,
+            let res= await axios.patch(`https://backend-i3b9.onrender.com/api/vehiculo/${id}`,
             {estado:estado})
             console.log(res.data);
             return res.data
