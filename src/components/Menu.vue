@@ -27,11 +27,11 @@
               <i class="fa-solid fa-house fa-xl"></i>
             </q-item-section>
 
-            <q-item-section>
-              <router-link to="/infoEmpresa" style="text-decoration: none;color: black;">
+            <!-- <q-item-section>
+              <router-link to="/home" style="text-decoration: none;color: black;">
                 Home
               </router-link>
-            </q-item-section>
+            </q-item-section> -->
           </q-item>
 
           <q-item clickable v-ripple>
