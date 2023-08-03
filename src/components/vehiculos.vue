@@ -117,7 +117,7 @@
           <button id="closeModalBtn" @click="modalRegistrar = false">
             Cerrar
           </button>
-          <button id="saveBtn" @click="registrarVehiculo(),(modalRegistrar=false)">Guardar</button>
+          <button id="saveBtn" @click="registrarVehiculo()">Guardar</button>
         </div>
       </div>
     </div>
