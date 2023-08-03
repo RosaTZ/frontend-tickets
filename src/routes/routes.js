@@ -1,10 +1,10 @@
 import menu from "../components/Menu.vue";
-import login from "../src/components/Login.vue";
-import infoEmpresa from "../src/components/InformacionEmpresa.vue"
+import login from "../src/components/login.vue";
+import infoEmpresa from "../src/components/empresa.vue"
 import clientes from "../components/cliente.vue"
-import revision from "../components/Revision.vue"
-import rutas from "../components/Rutas.vue"
-import ticket from "../components/Ticket.vue"
+import revision from "../components/revision.vue"
+import rutas from "../components/rutas.vue"
+import ticket from "../components/ticket.vue"
 import vehiculos from "../components/vehiculos.vue"
 import ventas from "../components/Venta.vue"
 import { createRouter, createWebHashHistory } from 'vue-router';
